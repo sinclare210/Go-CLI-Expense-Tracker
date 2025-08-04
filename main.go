@@ -13,42 +13,45 @@ type Expense struct{
 	date time.Time
 }
 
-func main (){
-	var expenses []Expense
-
+func main(){
+	var  expenses []Expense
 	var amount float64
-	var category string
 	var description string
-	
-	fmt.Println("Hello, Input your expenses for today?")
-	fmt.Println("Enter Amount:")
+	var category string
+	idCounter := 1
+
+	keepGoing := "y"
+	for keepGoing == "y"{
+	fmt.Println("Hello, What are you expenses for today?")
+	fmt.Println("Amount:")
 	fmt.Scanln(&amount)
-	fmt.Println("What Category:")
+	fmt.Println("category")
 	fmt.Scanln(&category)
-	fmt.Println("Desscription:")
+	fmt.Println("description")
 	fmt.Scanln(&description)
-	
+
 	expense := Expense{
-		id: 1,
+		id: idCounter,
 		amount: amount,
 		category: category,
 		description: description,
 		date: time.Now(),
-	}
 
+	}
+	idCounter++
 	expenses = append(expenses, expense)
-	fmt.Println("\n✅ Expense Added!")
-	fmt.Println("Current Expenses:")
-	for _, e := range expenses {
-		fmt.Printf("ID: %d | Amount: %.2f | Category: %s | Description: %s | Date: %s\n",
-	e.id,e.amount,e.category,e.description,e.date.Format("2006-01-02 15:04:05"))
-	}
-
-
+	fmt.Println("Expense Added")
+	fmt.Println("Do you want to add another expenes? (y/n)")
+	fmt.Scanln(&keepGoing)
 
 	
-
-	
-
 
 }
+
+for _, e := range expenses {
+	fmt.Printf("ID: %d | Amount: %.2f | Category: %s | Description: %s | Date: %s\n",
+			e.id, e.amount, e.category, e.description, e.date.Format("2006-01-02 15:04:05"))
+	}
+}
+
+	
