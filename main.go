@@ -35,10 +35,20 @@ func loadExpenses() ([]Expense, error) {
 func saveExpenses(expenses []Expense) error {
 	data, err := json.MarshalIndent(expenses, "", "  ")
 	if err != nil {
+		fmt.Println("Error marshalling expenses to JSON:", err)
 		return err
 	}
-	return os.WriteFile(dataFile, data, 0644)
+
+	err = os.WriteFile(dataFile, data, 0644)
+	if err != nil {
+		fmt.Println("Error writing to file:", err)
+		return err
+	}
+
+	fmt.Println("Expenses saved successfully.")
+	return nil
 }
+
 
 func main() {
 	expenses, err := loadExpenses()
